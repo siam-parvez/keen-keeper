@@ -29,7 +29,7 @@ interface MenuItem {
   items?: MenuItem[];
 }
 
-interface NavbarProps {
+interface HeaderProps {
   className?: string;
   logo?: {
     url: string;
@@ -39,7 +39,7 @@ interface NavbarProps {
   menu?: MenuItem[];
 }
 
-const Navbar = ({
+const Header = ({
   logo = {
     title: 'Keen',
     accentTitle: 'Keeper',
@@ -60,7 +60,7 @@ const Navbar = ({
   ],
 
   className,
-}: NavbarProps) => {
+}: HeaderProps) => {
   const pathname = usePathname();
 
   return (
@@ -156,4 +156,4 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
   );
 };
 
-export { Navbar };
+export { Header };

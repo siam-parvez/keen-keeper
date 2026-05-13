@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { TailwindHelper } from '@/components/tailwind-helper';
-import { Navbar } from '@/components/layout/header';
+import { Header } from '@/components/layout/header';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,8 +33,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="container mx-auto p-3 min-h-svh">{children}</main>
+        <Header className="fixed inset-x-0 bg-background" />
+        <main className="container mx-auto px-3">{children}</main>
         <TailwindHelper />
       </body>
     </html>
