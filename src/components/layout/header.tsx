@@ -18,7 +18,8 @@ import {
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 interface MenuItem {
   title: string;
@@ -33,14 +34,15 @@ interface NavbarProps {
   logo?: {
     url: string;
     title: string;
-    className?: string;
+    accentTitle?: string;
   };
   menu?: MenuItem[];
 }
 
 const Navbar = ({
   logo = {
-    title: 'KeenKeeper',
+    title: 'Keen',
+    accentTitle: 'Keeper',
     url: '/',
   },
   menu = [
@@ -52,26 +54,30 @@ const Navbar = ({
     },
     {
       title: 'Stats',
-      url: '#',
+      url: '/stats',
       icon: <ChartLine />,
     },
   ],
+
   className,
 }: NavbarProps) => {
+  const pathname = usePathname();
+
   return (
     <header className={cn('py-3 border-b', className)}>
       <div className="container mx-auto px-3">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex w-full">
-          <Link href={logo.url} className="flex items-center gap-2">
-            <span className="text-lg font-semibold tracking-tighter">
-              {logo.title}
+          <Link href={logo.url}>
+            <span className="text-lg font-black">{logo.title}</span>
+            <span className="text-lg font-bold text-primary">
+              {logo.accentTitle}
             </span>
           </Link>
           <div className="flex items-center">
             <NavigationMenu>
               <NavigationMenuList>
-                {menu.map((item) => renderMenuItem(item))}
+                {menu.map((item) => renderMenuItem(item, pathname))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -81,9 +87,10 @@ const Navbar = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href={logo.url} className="flex items-center gap-2">
-              <span className="text-lg font-semibold tracking-tighter">
-                {logo.title}
+            <Link href={logo.url}>
+              <span className="text-lg font-black">{logo.title}</span>
+              <span className="text-lg font-bold text-primary">
+                {logo.accentTitle}
               </span>
             </Link>
             <Sheet>
@@ -95,9 +102,10 @@ const Navbar = ({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <Link href={logo.url} className="flex items-center gap-2">
-                      <span className="text-lg font-semibold tracking-tighter">
-                        {logo.title}
+                    <Link href={logo.url}>
+                      <span className="text-lg font-black">{logo.title}</span>
+                      <span className="text-lg font-bold text-primary">
+                        {logo.accentTitle}
                       </span>
                     </Link>
                   </SheetTitle>
@@ -108,7 +116,7 @@ const Navbar = ({
                     collapsible
                     className="flex w-full flex-col gap-4"
                   >
-                    {menu.map((item) => renderMobileMenuItem(item))}
+                    {menu.map((item) => renderMobileMenuItem(item, pathname))}
                   </Accordion>
                 </div>
               </SheetContent>
@@ -120,22 +128,29 @@ const Navbar = ({
   );
 };
 
-const renderMenuItem = (item: MenuItem) => {
+const renderMenuItem = (item: MenuItem, pathname: string) => {
   return (
     <NavigationMenuItem key={item.title}>
-      <Link href={item.url} className="">
-        <Button>
-          {/* <Button variant={isActive ? 'default' : 'ghost'}> */}
+      {/* <Button> */}
+      <Button variant={pathname == item.url ? 'default' : 'ghost'} asChild>
+        <Link href={item.url}>
           {item.icon} {item.title}
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </NavigationMenuItem>
   );
 };
 
-const renderMobileMenuItem = (item: MenuItem) => {
+const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
   return (
-    <Link key={item.title} href={item.url} className="text-md font-semibold">
+    <Link
+      key={item.title}
+      href={item.url}
+      className={clsx(
+        pathname == item.url && 'text-primary',
+        'text-md font-semibold',
+      )}
+    >
       {item.title}
     </Link>
   );
