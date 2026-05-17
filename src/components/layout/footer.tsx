@@ -52,13 +52,13 @@ const Footer = () => {
         <div className="my-10">
           <h4 className="text-white mb-3">Social Links</h4>
           <div className="flex items-center justify-center w-full gap-4 mb-10">
-            {socialData.map((data) => (
+            {socialData.map((item) => (
               <Link
-                href={data.url}
-                key={data.label}
+                href={item.url}
+                key={item.label}
                 className="p-2 bg-white rounded-full size-8 md:size-10 hover:text-primary transition-colors"
               >
-                <data.icon className="size-full" title={data.label} />
+                <item.icon className="size-full" title={item.label} />
               </Link>
             ))}
           </div>
@@ -66,13 +66,13 @@ const Footer = () => {
         <div className="py-7 border-t border-white/10 text-white/50 flex flex-col md:flex-row md:justify-between text-xs md:text-base gap-3">
           <p>&copy; 2026 KeenKeeper. All rights reserved.</p>
           <div className="flex gap-4 items-center justify-center">
-            {legalLinksData.map((data) => (
+            {legalLinksData.map((item) => (
               <Link
-                key={data.label}
-                href={data.url}
+                key={item.label}
+                href={item.url}
                 className="hover:text-black transition-colors"
               >
-                {data.label}
+                {item.label}
               </Link>
             ))}
           </div>
