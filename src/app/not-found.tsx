@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Home } from 'lucide-react';
 import Link from 'next/link';
 
 export default function NotFound() {
@@ -26,7 +27,9 @@ export default function NotFound() {
       </CardContent>
       <CardFooter>
         <Button asChild variant="default" className="w-full">
-          <Link href="/">Home</Link>
+          <Link href="/">
+            <Home /> Home
+          </Link>
         </Button>
       </CardFooter>
     </Card>

@@ -2,14 +2,15 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import clsx from 'clsx';
 import Image from 'next/image';
-import friendData from '../../../public/friends.json';
+import friendsData from '@/data/friends.json';
+import Link from 'next/link';
 
 const FriendsSection = () => {
   const summaryData = [
     {
       id: '1',
       label: 'Total Friends',
-      count: 10,
+      count: friendsData.length,
     },
     {
       id: '2',
@@ -49,51 +50,50 @@ const FriendsSection = () => {
         Your Friends
       </h3>
       <div className="grid xs:grid-cols-2 lg:grid-cols-4 w-full gap-6">
-        {friendData.map((friend) => (
-          <Card
-            key={friend.id}
-            className="hover:scale-110 transition-transform cursor-pointer"
-          >
-            <CardContent className="flex justify-center items-center flex-col gap-2">
-              <Image
-                src={friend.picture}
-                alt={friend.name}
-                width={100}
-                height={100}
-                unoptimized
-                className="aspect-square border rounded-full object-cover"
-              />
-              <h2 className="text-lg xl:text-xl font-bold">{friend.name}</h2>
-              <p className="text-neutral-600 text-xs md:text-base">
-                {friend.days_since_contact}d ago
-              </p>
+        {friendsData.map((friend) => (
+          <Link href={`/friend/${friend.id}`} key={friend.id}>
+            <Card className="hover:scale-110 transition-transform cursor-pointer">
+              <CardContent className="flex justify-center items-center flex-col gap-2">
+                <Image
+                  src={friend.picture}
+                  alt={friend.name}
+                  width={100}
+                  height={100}
+                  unoptimized
+                  className="aspect-square border rounded-full object-cover"
+                />
+                <h2 className="text-lg xl:text-xl font-bold">{friend.name}</h2>
+                <p className="text-neutral-600 text-xs md:text-base">
+                  {friend.days_since_contact}d ago
+                </p>
 
-              <div className="flex gap-2 flex-wrap">
-                {friend.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                    className="bg-green-600/50 uppercase text-primary"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <Badge
-                variant="ghost"
-                className={clsx(
-                  friend.status == 'almost due'
-                    ? 'bg-yellow-500'
-                    : friend.status == 'overdue'
-                      ? 'bg-red-500'
-                      : 'bg-primary',
-                  'capitalize text-white',
-                )}
-              >
-                {friend.status}
-              </Badge>
-            </CardContent>
-          </Card>
+                <div className="flex gap-2 flex-wrap">
+                  {friend.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="bg-green-600/50 uppercase text-primary"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                <Badge
+                  variant="ghost"
+                  className={clsx(
+                    friend.status == 'almost due'
+                      ? 'bg-yellow-500'
+                      : friend.status == 'overdue'
+                        ? 'bg-red-500'
+                        : 'bg-primary',
+                    'capitalize text-white',
+                  )}
+                >
+                  {friend.status}
+                </Badge>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </section>
