@@ -15,12 +15,14 @@ const FriendsSection = () => {
     {
       id: '2',
       label: 'On Track',
-      count: 3,
+      count: friendsData.filter((friend) => friend.status == 'on-track').length,
     },
     {
       id: '3',
       label: 'Need Attention',
-      count: 6,
+      count: friendsData.filter(
+        (friend) => friend.days_since_contact >= friend.goal,
+      ).length,
     },
     {
       id: '4',

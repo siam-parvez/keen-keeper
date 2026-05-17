@@ -1,15 +1,9 @@
-'use client';
-import { use } from 'react';
-
-export default function BlogPostPage({
+export default async function FriendDetailsPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { slug } = use(params);
-  return (
-    <div>
-      <p>{slug}</p>
-    </div>
-  );
+  const { id } = await params;
+  console.log(id);
+  return <div>My Post: {id}</div>;
 }
