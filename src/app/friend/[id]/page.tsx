@@ -29,7 +29,7 @@ export default function FriendDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const { friends, setInteractions, interactions } = useApp();
+  const { friends, setInteractions } = useApp();
   const friend = friends.find((friend) => String(friend.id) == id);
 
   if (!friend) {
@@ -45,7 +45,6 @@ export default function FriendDetailsPage({
         date: new Date(),
       },
     ]);
-    console.log(interactions);
   };
 
   return (
