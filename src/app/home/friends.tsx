@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import clsx from 'clsx';
 import Image from 'next/image';
+import friendData from '../../../public/friends.json';
 
 const FriendsSection = () => {
   const summaryData = [
@@ -24,20 +25,6 @@ const FriendsSection = () => {
       id: '4',
       label: 'Interactions This Month',
       count: 12,
-    },
-  ];
-  const friendData = [
-    {
-      id: 1,
-      name: 'John Doe',
-      picture: 'https://avatar.vercel.sh/shadcn1',
-      email: 'john@example.com',
-      days_since_contact: 12,
-      status: 'almost due',
-      tags: ['college', 'close friend'],
-      bio: 'Met in university. Love hiking together.',
-      goal: 14,
-      next_due_date: '2025-07-20',
     },
   ];
 
@@ -73,7 +60,8 @@ const FriendsSection = () => {
                 alt={friend.name}
                 width={100}
                 height={100}
-                className="aspect-square rounded-full object-cover"
+                unoptimized
+                className="aspect-square border rounded-full object-cover"
               />
               <h2 className="text-lg xl:text-xl font-bold">{friend.name}</h2>
               <p className="text-neutral-600 text-xs md:text-base">

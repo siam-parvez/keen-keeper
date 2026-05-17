@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "John Doe",
-    "picture": "https://example.com/photo1.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundRotation=0,360,-50&beard[]&backgroundColor=b6e3f4,ffdfbf&seed=Luis",
     "email": "john@example.com",
     "days_since_contact": 12,
     "status": "almost due",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "name": "Ayesha Rahman",
-    "picture": "https://example.com/photo2.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundRotation=0,360,-50&beard[]&backgroundColor=b6e3f4,ffdfbf&seed=Jack",
     "email": "ayesha@example.com",
     "days_since_contact": 3,
     "status": "on-track",
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "name": "Michael Chen",
-    "picture": "https://example.com/photo3.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Luis",
     "email": "michael@example.com",
     "days_since_contact": 10,
     "status": "almost due",
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "name": "Sarah Islam",
-    "picture": "https://example.com/photo4.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundRotation=0,360,-50&beard[]&backgroundColor=b6e3f4,ffdfbf&seed=Liam",
     "email": "sarah@example.com",
     "days_since_contact": 15,
     "status": "overdue",
@@ -50,7 +50,7 @@
   {
     "id": 5,
     "name": "David Kim",
-    "picture": "https://example.com/photo5.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Aiden",
     "email": "david@example.com",
     "days_since_contact": 7,
     "status": "on-track",
@@ -62,7 +62,7 @@
   {
     "id": 6,
     "name": "Nusrat Jahan",
-    "picture": "https://example.com/photo6.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundRotation=0,360,-50&beard[]&backgroundColor=b6e3f4,ffdfbf&seed=Amaya",
     "email": "nusrat@example.com",
     "days_since_contact": 12,
     "status": "almost due",
@@ -74,7 +74,7 @@
   {
     "id": 7,
     "name": "Ahmed Ali",
-    "picture": "https://example.com/photo7.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Alexander",
     "email": "ahmed@example.com",
     "days_since_contact": 20,
     "status": "overdue",
@@ -86,7 +86,7 @@
   {
     "id": 8,
     "name": "Emily Watson",
-    "picture": "https://example.com/photo8.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Ryker",
     "email": "emily@example.com",
     "days_since_contact": 10,
     "status": "almost due",
@@ -98,7 +98,7 @@
   {
     "id": 9,
     "name": "Rafiq Hasan",
-    "picture": "https://example.com/photo9.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Maria",
     "email": "rafiq@example.com",
     "days_since_contact": 5,
     "status": "on-track",
@@ -110,7 +110,7 @@
   {
     "id": 10,
     "name": "Sophia Brown",
-    "picture": "https://example.com/photo10.jpg",
+    "picture": "https://api.dicebear.com/9.x/toon-head/svg?backgroundType=solid,gradientLinear&backgroundColor=b6e3f4,ffdfbf&seed=Emery",
     "email": "sophia@example.com",
     "days_since_contact": 8,
     "status": "almost due",
@@ -118,29 +118,5 @@
     "bio": "Met during a trip abroad.",
     "goal": 8,
     "next_due_date": "2025-06-12"
-  },
-  {
-    "id": 11,
-    "name": "Tanvir Ahmed",
-    "picture": "https://example.com/photo11.jpg",
-    "email": "tanvir@example.com",
-    "days_since_contact": 2,
-    "status": "on-track",
-    "tags": ["childhood"],
-    "bio": "Childhood friend from neighborhood.",
-    "goal": 5,
-    "next_due_date": "2025-06-30"
-  },
-  {
-    "id": 12,
-    "name": "Isabella Garcia",
-    "picture": "https://example.com/photo12.jpg",
-    "email": "isabella@example.com",
-    "days_since_contact": 13,
-    "status": "almost due",
-    "tags": ["university", "club"],
-    "bio": "Met in university cultural club.",
-    "goal": 15,
-    "next_due_date": "2025-07-01"
   }
 ]
