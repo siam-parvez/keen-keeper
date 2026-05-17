@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { TailwindHelper } from '@/components/tailwind-helper';
 import { Header } from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: '%s | KeenKeeper',
-    default: 'KeenKeeper',
+    default: 'KeenKeeper - Keep Your Friendships Alive',
   },
   description: 'Keep Your Friendships Alive',
 };
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Header className="fixed inset-x-0 bg-background" />
         <main className="container mx-auto px-3">{children}</main>
+        <Footer />
         <TailwindHelper />
       </body>
     </html>
