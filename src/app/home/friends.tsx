@@ -1,26 +1,29 @@
+'use client';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { useFriends } from '@/context/FriendsContext';
 import clsx from 'clsx';
 import Image from 'next/image';
-import friendsData from '@/data/friends.json';
 import Link from 'next/link';
 
 const FriendsSection = () => {
+  const { friends } = useFriends();
+
   const summaryData = [
     {
       id: '1',
       label: 'Total Friends',
-      count: friendsData.length,
+      count: friends.length,
     },
     {
       id: '2',
       label: 'On Track',
-      count: friendsData.filter((friend) => friend.status == 'on-track').length,
+      count: friends.filter((friend) => friend.status == 'on-track').length,
     },
     {
       id: '3',
       label: 'Need Attention',
-      count: friendsData.filter(
+      count: friends.filter(
         (friend) => friend.days_since_contact >= friend.goal,
       ).length,
     },
@@ -52,9 +55,9 @@ const FriendsSection = () => {
         Your Friends
       </h3>
       <div className="grid xs:grid-cols-2 lg:grid-cols-4 w-full gap-6">
-        {friendsData.map((friend) => (
+        {friends.map((friend) => (
           <Link href={`/friend/${friend.id}`} key={friend.id}>
-            <Card className="hover:scale-110 transition-transform cursor-pointer">
+            <Card className="hover:scale-110 transition-transform cursor-pointer text-center">
               <CardContent className="flex justify-center items-center flex-col gap-2">
                 <Image
                   src={friend.picture}
@@ -69,7 +72,7 @@ const FriendsSection = () => {
                   {friend.days_since_contact}d ago
                 </p>
 
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex gap-2 flex-wrap items-center justify-center">
                   {friend.tags.map((tag) => (
                     <Badge
                       key={tag}
