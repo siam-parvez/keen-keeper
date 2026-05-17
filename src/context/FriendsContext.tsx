@@ -1,6 +1,13 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react';
 import friendsData from '@/data/friends.json';
 
 type Friend = {
@@ -16,32 +23,41 @@ type Friend = {
   next_due_date: string;
 };
 
-type FriendsContextType = {
-  friends: Friend[];
-  setFriends: (data: Friend[]) => void;
+export type Interaction = {
+  type: 'call' | 'text' | 'video';
+  title: string;
+  date: Date;
 };
 
-const FriendsContext = createContext<FriendsContextType | null>(null);
+type AppContextType = {
+  friends: Friend[];
+  setFriends: (data: Friend[]) => void;
 
-// const InteractionContext = createContext<FriendsContextType | null>(null);
+  interactions: Interaction[];
+  setInteractions: Dispatch<SetStateAction<Interaction[]>>;
+};
 
-export function FriendsProvider({ children }: { children: ReactNode }) {
+const AppContext = createContext<AppContextType | null>(null);
+
+export function AppProvider({ children }: { children: ReactNode }) {
   const [friends, setFriends] = useState<Friend[]>(
     () => friendsData as Friend[],
   );
-
+  const [interactions, setInteractions] = useState<Interaction[]>([]);
   return (
-    <FriendsContext.Provider value={{ friends, setFriends }}>
+    <AppContext.Provider
+      value={{ friends, setFriends, interactions, setInteractions }}
+    >
       {children}
-    </FriendsContext.Provider>
+    </AppContext.Provider>
   );
 }
 
-export function useFriends() {
-  const context = useContext(FriendsContext);
+export function useApp() {
+  const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error('useFriends must be used inside FriendsProvider');
+    throw new Error('useFriends must be used inside AppProvider');
   }
 
   return context;

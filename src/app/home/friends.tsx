@@ -1,13 +1,13 @@
 'use client';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { useFriends } from '@/context/FriendsContext';
+import { useApp } from '@/context/FriendsContext';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const FriendsSection = () => {
-  const { friends } = useFriends();
+  const { friends } = useApp();
 
   const summaryData = [
     {

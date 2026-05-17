@@ -4,7 +4,7 @@ import './globals.css';
 import { TailwindHelper } from '@/components/tailwind-helper';
 import { Header } from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { FriendsProvider } from '@/context/FriendsContext';
+import { AppProvider } from '@/context/FriendsContext';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,7 +37,7 @@ export default function RootLayout({
       <body className="flex flex-col">
         <Header className="fixed inset-x-0 bg-background" />
         <main className="container mx-auto px-3 py-32 space-y-6 md:space-y-12">
-          <FriendsProvider>{children}</FriendsProvider>
+          <AppProvider>{children}</AppProvider>
         </main>
         <TailwindHelper />
         <Footer />

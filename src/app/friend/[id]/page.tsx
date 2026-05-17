@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useFriends } from '@/context/FriendsContext';
+import { useApp } from '@/context/FriendsContext';
 import clsx from 'clsx';
 import {
   Archive,
@@ -29,12 +29,24 @@ export default function FriendDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const { friends } = useFriends();
+  const { friends, setInteractions, interactions } = useApp();
   const friend = friends.find((friend) => String(friend.id) == id);
 
   if (!friend) {
     return <div>Friend not found</div>;
   }
+
+  const handleInteraction = (type: 'call' | 'text' | 'video') => {
+    setInteractions((prev) => [
+      ...prev,
+      {
+        type,
+        title: `${type.charAt(0).toUpperCase() + type.slice(1)} with ${friend.name}`,
+        date: new Date(),
+      },
+    ]);
+    console.log(interactions);
+  };
 
   return (
     <section className="grid md:grid-cols-3 gap-4">
@@ -166,7 +178,10 @@ export default function FriendDetailsPage({
           <CardContent className="grid grid-cols-3 gap-3 h-full">
             {/* Phone */}
 
-            <Card className="bg-green-50 cursor-pointer">
+            <Card
+              className="bg-green-50 cursor-pointer"
+              onClick={() => handleInteraction('call')}
+            >
               <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
                 <Phone />
                 <p className="text-neutral-600 text-xs md:text-base">Call</p>
@@ -175,7 +190,10 @@ export default function FriendDetailsPage({
 
             {/* Message */}
 
-            <Card className="bg-green-50 cursor-pointer">
+            <Card
+              className="bg-green-50 cursor-pointer"
+              onClick={() => handleInteraction('text')}
+            >
               <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
                 <MessageSquareMore />
                 <p className="text-neutral-600 text-xs md:text-base">Text</p>
@@ -184,7 +202,10 @@ export default function FriendDetailsPage({
 
             {/* Video */}
 
-            <Card className="bg-green-50 cursor-pointer">
+            <Card
+              className="bg-green-50 cursor-pointer"
+              onClick={() => handleInteraction('video')}
+            >
               <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
                 <Video />
                 <p className="text-neutral-600 text-xs md:text-base">Video</p>
