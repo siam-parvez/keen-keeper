@@ -36,7 +36,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex flex-col">
-        <Header className="fixed inset-x-0 bg-background" />
+        <Header />
         <main className="container mx-auto px-3 py-32 space-y-6 md:space-y-12">
           <AppProvider>{children}</AppProvider>
         </main>

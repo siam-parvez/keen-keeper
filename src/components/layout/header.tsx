@@ -64,7 +64,12 @@ const Header = ({
   const pathname = usePathname();
 
   return (
-    <header className={cn('py-3 border-b', className)}>
+    <header
+      className={cn(
+        'py-3 border-b fixed inset-x-0 bg-background z-10',
+        className,
+      )}
+    >
       <div className="container mx-auto px-3">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex w-full">
