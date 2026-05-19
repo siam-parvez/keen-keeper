@@ -39,7 +39,7 @@ const FriendsSection = () => {
       <div className="grid xs:grid-cols-2 lg:grid-cols-4 w-full gap-6">
         {summaryData.map((data) => (
           <Card key={data.id}>
-            <CardContent className="flex justify-center items-center flex-col gap-2">
+            <CardContent className="flex justify-center items-center flex-col gap-2 text-center">
               <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold text-primary">
                 {data.count}
               </h2>

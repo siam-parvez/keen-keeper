@@ -6,6 +6,7 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import friendsData from '@/data/friends.json';
@@ -26,7 +27,7 @@ type Friend = {
 export type Interaction = {
   type: 'call' | 'text' | 'video';
   title: string;
-  date: Date;
+  date: string;
 };
 
 type AppContextType = {
@@ -45,7 +46,42 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [friends, setFriends] = useState<Friend[]>(
     () => friendsData as Friend[],
   );
+
   const [interactions, setInteractions] = useState<Interaction[]>([]);
+  useEffect(() => {
+    try {
+      if (typeof window === 'undefined') return;
+
+      const stored =
+        typeof window.localStorage?.getItem === 'function'
+          ? window.localStorage.getItem('interactions')
+          : null;
+
+      if (stored) {
+        const id = setTimeout(() => {
+          setInteractions(JSON.parse(stored));
+        }, 0);
+
+        return () => clearTimeout(id);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (typeof window === 'undefined') return;
+
+      if (typeof window.localStorage?.setItem === 'function') {
+        window.localStorage.setItem(
+          'interactions',
+          JSON.stringify(interactions),
+        );
+      }
+    } catch {}
+  }, [interactions]);
+
   return (
     <AppContext.Provider
       value={{ friends, setFriends, interactions, setInteractions }}

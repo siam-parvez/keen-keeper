@@ -42,7 +42,7 @@ export default function FriendDetailsPage({
       {
         type,
         title: `${type.charAt(0).toUpperCase() + type.slice(1)} with ${friend.name}`,
-        date: new Date(),
+        date: new Date().toISOString(),
       },
     ]);
   };
