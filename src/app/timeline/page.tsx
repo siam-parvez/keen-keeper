@@ -2,6 +2,7 @@
 
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -15,7 +16,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { MessageSquare, Phone, Video } from 'lucide-react';
+import {
+  History,
+  MessageSquare,
+  Phone,
+  SquareDashed,
+  Video,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMemo, useState } from 'react';
 
@@ -33,51 +40,67 @@ const TimelinePage = () => {
   return (
     <section className="flex flex-col gap-2">
       <h3 className="text-lg md:text-xl xl:text-2xl font-bold">Timeline</h3>
-      <Select defaultValue="all" onValueChange={(value) => setFilter(value)}>
-        <SelectTrigger className="w-45">
-          <SelectValue placeholder="Filter Timeline" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="all">All</SelectItem>
-            <SelectItem value="call">Call</SelectItem>
-            <SelectItem value="text">Text</SelectItem>
-            <SelectItem value="video">Video</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <div className="flex flex-col gap-4 mt-4">
-        {filteredInteractions.map((interaction, index) => (
-          <Card
-            key={`${interaction.title}-${interaction.type}-${index}`}
-            className={cn(
-              interaction.type == 'call'
-                ? 'bg-green-100'
-                : interaction.type == 'text'
-                  ? 'bg-yellow-100'
-                  : 'bg-cyan-100',
-            )}
+      {interactions.length > 0 ? (
+        <div>
+          <Select
+            defaultValue="all"
+            onValueChange={(value) => setFilter(value)}
           >
-            <CardHeader className="flex items-center gap-6">
-              <div>
-                {interaction.type == 'call' ? (
-                  <Phone />
-                ) : interaction.type == 'text' ? (
-                  <MessageSquare />
-                ) : (
-                  <Video />
+            <SelectTrigger className="w-45">
+              <SelectValue placeholder="Filter Timeline" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="call">Call</SelectItem>
+                <SelectItem value="text">Text</SelectItem>
+                <SelectItem value="video">Video</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <div className="flex flex-col gap-4 mt-4">
+            {filteredInteractions.map((interaction, index) => (
+              <Card
+                key={`${interaction.title}-${interaction.type}-${index}`}
+                className={cn(
+                  interaction.type == 'call'
+                    ? 'bg-green-100'
+                    : interaction.type == 'text'
+                      ? 'bg-yellow-100'
+                      : 'bg-cyan-100',
                 )}
-              </div>
-              <div>
-                <CardTitle>{interaction.title}</CardTitle>
-                <CardDescription className="text-xs mt-1">
-                  {formatDate(interaction.date)}
-                </CardDescription>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+              >
+                <CardHeader className="flex items-center gap-6">
+                  <div>
+                    {interaction.type == 'call' ? (
+                      <Phone />
+                    ) : interaction.type == 'text' ? (
+                      <MessageSquare />
+                    ) : (
+                      <Video />
+                    )}
+                  </div>
+                  <div>
+                    <CardTitle>{interaction.title}</CardTitle>
+                    <CardDescription className="text-xs mt-1">
+                      {formatDate(interaction.date)}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <Card>
+          <CardHeader className="text-center">
+            <History className="size-32 mx-auto mb-6" />
+            <CardTitle>
+              No Timeline data yet! Interact with friends to see timeline.
+            </CardTitle>
+          </CardHeader>
+        </Card>
+      )}
     </section>
   );
 };
