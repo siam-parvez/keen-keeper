@@ -39,6 +39,8 @@ type AppContextType = {
 
 const AppContext = createContext<AppContextType | null>(null);
 
+// toast notification and save data in localStorage
+
 export function AppProvider({ children }: { children: ReactNode }) {
   const [friends, setFriends] = useState<Friend[]>(
     () => friendsData as Friend[],

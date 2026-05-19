@@ -174,7 +174,7 @@ export default function FriendDetailsPage({
               Quick Check-In
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-3 gap-3 h-full">
+          <CardContent className="grid grid-cols-3 gap-3 h-full mb-10">
             {/* Phone */}
 
             <Card

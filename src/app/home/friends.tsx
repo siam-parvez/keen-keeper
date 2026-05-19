@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const FriendsSection = () => {
-  const { friends } = useApp();
+  const { friends, interactions } = useApp();
 
   const summaryData = [
     {
@@ -30,7 +30,7 @@ const FriendsSection = () => {
     {
       id: '4',
       label: 'Interactions This Month',
-      count: 12,
+      count: interactions.length,
     },
   ];
 

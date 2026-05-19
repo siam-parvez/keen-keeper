@@ -15,7 +15,8 @@ const TimelinePage = () => {
       <h3 className="text-lg md:text-xl xl:text-2xl font-bold">Timeline</h3>
       {interactions.map((interaction, index) => (
         <Card key={`${interaction.title}-${interaction.type}-${index}`}>
-          {interaction.title} {interaction.type} {new Date(interaction.date).toLocaleDateString()}
+          {interaction.title} {interaction.type}{' '}
+          {new Date(interaction.date).toLocaleDateString()}
         </Card>
       ))}
     </section>
