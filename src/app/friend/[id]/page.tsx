@@ -47,6 +47,24 @@ export default function FriendDetailsPage({
     ]);
   };
 
+  const interactionCards = [
+    {
+      type: 'call',
+      label: 'Call',
+      icon: Phone,
+    },
+    {
+      type: 'text',
+      label: 'Text',
+      icon: MessageSquareMore,
+    },
+    {
+      type: 'video',
+      label: 'Video',
+      icon: Video,
+    },
+  ] as const;
+
   return (
     <section className="grid md:grid-cols-3 gap-4">
       <div className="flex gap-4 flex-col">
@@ -174,42 +192,23 @@ export default function FriendDetailsPage({
               Quick Check-In
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-3 gap-3 h-full mb-10">
+          <CardContent className="grid grid-cols-3 gap-6 h-full mb-10">
             {/* Phone */}
 
-            <Card
-              className="bg-green-50 cursor-pointer"
-              onClick={() => handleInteraction('call')}
-            >
-              <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-                <Phone />
-                <p className="text-neutral-600 text-xs md:text-base">Call</p>
-              </CardContent>
-            </Card>
-
-            {/* Message */}
-
-            <Card
-              className="bg-green-50 cursor-pointer"
-              onClick={() => handleInteraction('text')}
-            >
-              <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-                <MessageSquareMore />
-                <p className="text-neutral-600 text-xs md:text-base">Text</p>
-              </CardContent>
-            </Card>
-
-            {/* Video */}
-
-            <Card
-              className="bg-green-50 cursor-pointer"
-              onClick={() => handleInteraction('video')}
-            >
-              <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-                <Video />
-                <p className="text-neutral-600 text-xs md:text-base">Video</p>
-              </CardContent>
-            </Card>
+            {interactionCards.map(({ type, label, icon: Icon }) => (
+              <Card
+                key={type}
+                className="bg-green-50 cursor-pointer hover:scale-110 transition-all"
+                onClick={() => handleInteraction(type)}
+              >
+                <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
+                  <Icon />
+                  <p className="text-neutral-600 text-xs md:text-base">
+                    {label}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </CardContent>
         </Card>
       </div>
