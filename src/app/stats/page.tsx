@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApp } from '@/context/FriendsContext';
 import { ChartPie } from 'lucide-react';
-import { Pie, PieChart } from 'recharts';
+import { Legend, Pie, PieChart, Tooltip } from 'recharts';
 
 const TimelinePage = ({
   isAnimationActive = true,
@@ -58,6 +58,13 @@ const TimelinePage = ({
                 paddingAngle={5}
                 dataKey="value"
                 isAnimationActive={isAnimationActive}
+              />
+              <Tooltip defaultIndex={2} />
+              <Legend
+                wrapperStyle={{
+                  lineHeight: '60px',
+                }}
+                verticalAlign="bottom"
               />
             </PieChart>
           </CardContent>
