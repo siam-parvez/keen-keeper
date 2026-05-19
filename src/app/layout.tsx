@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import { Toaster } from '@/components/ui/sonner';
 import { TailwindHelper } from '@/components/tailwind-helper';
 import { Header } from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { AppProvider } from '@/context/FriendsContext';
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,6 +40,7 @@ export default function RootLayout({
         <main className="container mx-auto px-3 py-32 space-y-6 md:space-y-12">
           <AppProvider>{children}</AppProvider>
         </main>
+        <Toaster />
         <TailwindHelper />
         <Footer />
       </body>

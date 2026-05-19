@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useApp } from '@/context/FriendsContext';
+import { Friend, useApp } from '@/context/FriendsContext';
 import clsx from 'clsx';
 import {
   Archive,
@@ -22,6 +22,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { use } from 'react';
+import { toast } from 'sonner';
 
 export default function FriendDetailsPage({
   params,
@@ -45,6 +46,9 @@ export default function FriendDetailsPage({
         date: new Date().toISOString(),
       },
     ]);
+    toast(
+      `${type.charAt(0).toUpperCase() + type.slice(1)} with ${friend.name} added to timeline`,
+    );
   };
 
   const interactionCards = [
@@ -65,6 +69,26 @@ export default function FriendDetailsPage({
     },
   ] as const;
 
+  const friendStats = [
+    {
+      label: 'Days Since Contact',
+      value: (friend: Friend) => friend.days_since_contact,
+    },
+    {
+      label: 'Goal (Days)',
+      value: (friend: Friend) => friend.goal,
+    },
+    {
+      label: 'Next Due',
+      value: (friend: Friend) =>
+        new Date(friend.next_due_date).toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric',
+        }),
+    },
+  ];
+
   return (
     <section className="grid md:grid-cols-3 gap-4">
       <div className="flex gap-4 flex-col">
@@ -79,10 +103,6 @@ export default function FriendDetailsPage({
               className="aspect-square border rounded-full object-cover"
             />
             <h2 className="text-lg xl:text-xl font-bold">{friend.name}</h2>
-            {/* <p className="text-neutral-600 text-xs md:text-base">
-            {friend.days_since_contact}d ago
-          </p> */}
-
             <div className="flex gap-2 flex-wrap items-center justify-center">
               {friend.tags.map((tag) => (
                 <Badge
@@ -136,38 +156,18 @@ export default function FriendDetailsPage({
 
       <div className="md:col-span-2 flex flex-col gap-4">
         <div className="grid grid-cols-3 gap-4 text-center h-full">
-          <Card>
-            <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-              <h2 className="text-xl md:text-2xl xl:text-3xl font-bold">
-                {friend.days_since_contact}
-              </h2>
-              <p className="text-neutral-600 text-xs md:text-base">
-                Days Since Contact
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-              <h2 className="text-xl md:text-2xl xl:text-3xl font-bold">
-                {friend.goal}
-              </h2>
-              <p className="text-neutral-600 text-xs md:text-base">
-                Goal (Days)
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
-              <h2 className="text-xl md:text-2xl xl:text-3xl font-bold">
-                {new Date(friend.next_due_date).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: '2-digit',
-                  year: 'numeric',
-                })}
-              </h2>
-              <p className="text-neutral-600 text-xs md:text-base">Next Due</p>
-            </CardContent>
-          </Card>
+          {friendStats.map((stat, index) => (
+            <Card key={index}>
+              <CardContent className="flex justify-center items-center flex-col gap-2 my-auto">
+                <h2 className="text-xl md:text-2xl xl:text-3xl font-bold">
+                  {stat.value(friend)}
+                </h2>
+                <p className="text-neutral-600 text-xs md:text-base">
+                  {stat.label}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
         <Card className="min-h-fit gap-2">
           <CardHeader className="flex justify-between items-center gap-2">

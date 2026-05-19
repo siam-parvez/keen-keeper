@@ -2,7 +2,6 @@
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -16,13 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  History,
-  MessageSquare,
-  Phone,
-  SquareDashed,
-  Video,
-} from 'lucide-react';
+import { History, MessageSquare, Phone, Video } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMemo, useState } from 'react';
 
